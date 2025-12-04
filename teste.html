@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainzBR_STORE - A 01 DAS VENDAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --secondary-dark: #5a0890;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --dark: #14213d;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas animadas */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            box-shadow: var(--shadow);
+        }
+
+        .store-info h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .store-info p {
+            font-size: 14px;
+            color: var(--gray-light);
+            opacity: 0.8;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .cart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Navegação por abas */
+        .tabs-container {
+            background: rgba(20, 33, 61, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .add-tab-btn {
+            background: transparent;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* Produtos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: rgba(20, 33, 61, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(67, 97, 238, 0.3);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-rarity {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .rarity-common { background: #6c757d; color: white; }
+        .rarity-rare { background: #007bff; color: white; }
+        .rarity-epic { background: #6f42c1; color: white; }
+        .rarity-legendary { background: #fd7e14; color: white; }
+        .rarity-mythic { background: #e83e8c; color: white; }
+
+        .product-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .add-to-cart {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .add-to-cart:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Modal de compra */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: rgba(20, 33, 61, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-step {
+            display: none;
+        }
+
+        .modal-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step-indicator:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        /* CAPTCHA */
+        .captcha-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .captcha-code {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 20px;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            color: var(--success);
+            user-select: none;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .captcha-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .captcha-control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .captcha-control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .captcha-input.correct {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .captcha-input.incorrect {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        /* PIX */
+        .pix-container {
+            text-align: center;
+        }
+
+        .pix-key {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 20px 0;
+            word-break: break-all;
+            font-family: monospace;
+            border: 2px dashed rgba(67, 97, 238, 0.5);
+            color: var(--success);
+            font-size: 14px;
+        }
+
+        .pix-info {
+            background: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .pix-info p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .pix-warning {
+            color: #f1c40f;
+            font-weight: 600;
+        }
+
+        .order-id {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .order-id-text {
+            font-family: monospace;
+            font-size: 16px;
+            color: var(--success);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .upload-container {
+            margin: 25px 0;
+        }
+
+        .upload-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .upload-box {
+            border: 3px dashed rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-box:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-box i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-box p {
+            margin-bottom: 10px;
+        }
+
+        .upload-box small {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .upload-preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .upload-preview img {
+            max-width: 200px;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        .upload-preview.active {
+            display: block;
+        }
+
+        /* Chat */
+        .chat-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .chat-overlay.active {
+            display: flex;
+        }
+
+        .chat-container {
+            background: rgba(20, 33, 61, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 800px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .chat-close {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-close:hover {
+            color: var(--danger);
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            max-width: 70%;
+            padding: 15px;
+            border-radius: 20px;
+            position: relative;
+            animation: messageAppear 0.3s ease;
+        }
+
+        @keyframes messageAppear {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chat-message.user {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-message.bot {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-message.admin {
+            background: rgba(241, 196, 15, 0.2);
+            border-left: 4px solid #f1c40f;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .chat-option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .chat-option-btn:hover {
+            background: rgba(67, 97, 238, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .chat-option-btn.primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .chat-input-area {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+
+        .chat-input-area.active {
+            display: block;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .chat-send {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.05);
+        }
+
+        /* Botões de navegação */
+        .modal-footer {
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modal-btn {
+            padding: 15px 30px;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-btn.prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .modal-btn.prev:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-btn.next {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .modal-btn.next:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .modal-btn.next:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .modal-btn.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .modal-btn.success:hover {
+            background: #3aa8d0;
+            transform: scale(1.05);
+        }
+
+        /* Painel Admin */
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .admin-overlay.active {
+            display: flex;
+        }
+
+        .admin-container {
+            background: rgba(20, 33, 61, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-header h3 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .admin-close {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-close:hover {
+            color: var(--danger);
+        }
+
+        .admin-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .admin-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-menu-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-menu-btn.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .admin-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .admin-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--success);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(76, 201, 240, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-table th {
+            background: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .admin-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .action-btn {
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn.edit {
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+        }
+
+        .action-btn.delete {
+            background: rgba(247, 37, 133, 0.2);
+            color: var(--danger);
+        }
+
+        .action-btn.save {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+
+        /* Notificações */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 4000;
+            animation: toastSlideIn 0.3s ease;
+            box-shadow: var(--shadow);
+            max-width: 350px;
+        }
+
+        @keyframes toastSlideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast.success {
+            background: var(--success);
+            border-left: 5px solid #3aa8d0;
+        }
+
+        .toast.error {
+            background: var(--danger);
+            border-left: 5px solid #d4145a;
+        }
+
+        .toast.warning {
+            background: var(--warning);
+            border-left: 5px solid #e68900;
+        }
+
+        .toast.info {
+            background: var(--primary);
+            border-left: 5px solid #2a4fc9;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-controls {
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 15px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .admin-body {
+                flex-direction: column;
+            }
+            
+            .admin-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 15px;
+                overflow-x: auto;
+            }
+            
+            .admin-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .admin-menu-btn {
+                flex: 1;
+                min-width: 150px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .chat-option-btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .store-info h1 {
+                font-size: 22px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                padding: 10px;
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding: 15px;
+            }
+            
+            .step-indicator {
+                margin-bottom: 20px;
+            }
+            
+            .step {
+                width: 25px;
+                height: 25px;
+                font-size: 14px;
+            }
+            
+            .modal-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+
+        /* Utilitários */
+        .text-center { text-align: center; }
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+        .d-none { display: none; }
+        .d-block { display: block; }
+        .w-100 { width: 100%; }
+    </style>
+</head>
+<body>
+    <!-- Partículas animadas -->
+    <div id="particles-js"></div>
+    
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header>
+            <div class="logo-section" id="adminTrigger">
+                <div class="logo">B</div>
+                <div class="store-info">
+                    <h1>BrainzBR_STORE</h1>
+                    <p>A 01 DAS VENDAS | FUNDADOR: BRANZZ_BR</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <button class="cart-btn" id="openCart">
+                    <i class="fas fa-shopping-cart"></i>
+                    Carrinho <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Navegação por abas -->
+        <div class="tabs-container">
+            <div class="tabs-header" id="tabsHeader">
+                <!-- As abas serão geradas dinamicamente -->
+                <button class="tab-btn active" data-tab="default">Produtos em Destaque</button>
+            </div>
+            
+            <div class="tabs-content">
+                <div class="tab-content active" id="tab-default">
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Os produtos serão carregados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal de compra -->
+        <div class="modal-overlay" id="purchaseModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2>Finalizar Compra</h2>
+                    <button class="close-modal" id="closeModal">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Indicador de passos -->
+                    <div class="step-indicator">
+                        <div class="step active" id="step1">1</div>
+                        <div class="step" id="step2">2</div>
+                        <div class="step" id="step3">3</div>
+                        <div class="step" id="step4">4</div>
+                    </div>
+                    
+                    <!-- Passo 1: CAPTCHA -->
+                    <div class="modal-step active" id="stepContent1">
+                        <h3 class="text-center mb-20">Verificação de Segurança</h3>
+                        <div class="captcha-container">
+                            <p>Digite o código abaixo para provar que não é um robô:</p>
+                            <div class="captcha-code" id="captchaCode">A1B2C3</div>
+                            <input type="text" class="captcha-input" id="captchaInput" placeholder="Digite o código acima" maxlength="6">
+                            <div class="captcha-controls">
+                                <button class="captcha-control-btn" id="newCaptcha">
+                                    <i class="fas fa-sync-alt"></i> Novo Código
+                                </button>
+                                <button class="captcha-control-btn" id="audioCaptcha">
+                                    <i class="fas fa-volume-up"></i> Ouvir Código
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 2: PIX e Comprovante -->
+                    <div class="modal-step" id="stepContent2">
+                        <h3 class="text-center mb-20">Pagamento via PIX</h3>
+                        <div class="pix-container">
+                            <p>Faça o pagamento para a seguinte chave PIX:</p>
+                            <div class="pix-key">8a5850c2-3987-4c18-8197-37f93739d9ec</div>
+                            
+                            <div class="pix-info">
+                                <p class="pix-warning">⚠️ IMPORTANTE</p>
+                                <p>• Nome do beneficiário: <strong>Bruno Teixeira De Carvalho</strong></p>
+                                <p>• Valor total: <strong id="pixTotal">R$ 0,00</strong></p>
+                                <p>• O pagamento deve ser feito exatamente para esse nome</p>
+                            </div>
+                            
+                            <p>Seu ID de compra:</p>
+                            <div class="order-id">
+                                <span class="order-id-text" id="orderIdText">BRANZZ_BR-CODE=000000</span>
+                                <button class="copy-btn" id="copyOrderId">
+                                    <i class="fas fa-copy"></i> Copiar
+                                </button>
+                            </div>
+                            <p class="text-center mt-10"><small>Guarde este ID, ele será necessário para receber seu produto</small></p>
+                            
+                            <div class="upload-container">
+                                <label class="upload-label">Envie o comprovante do PIX:</label>
+                                <div class="upload-box" id="uploadBox">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Arraste e solte ou clique para selecionar</p>
+                                    <small>Formatos aceitos: JPG, PNG, PDF (max. 5MB)</small>
+                                </div>
+                                <input type="file" id="receiptInput" accept="image/*,.pdf" style="display: none;">
+                                
+                                <div class="upload-preview" id="uploadPreview">
+                                    <img id="receiptPreview" src="" alt="Pré-visualização do comprovante">
+                                    <p id="fileName"></p>
+                                    <button class="action-btn delete" id="removeReceipt">
+                                        <i class="fas fa-trash"></i> Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 3: Mensagem Final -->
+                    <div class="modal-step" id="stepContent3">
+                        <h3 class="text-center mb-20">Compra Concluída!</h3>
+                        <div class="text-center">
+                            <i class="fas fa-check-circle" style="font-size: 80px; color: var(--success); margin-bottom: 20px;"></i>
+                            <p style="font-size: 18px; margin-bottom: 20px;">✅ Parabéns! Sua compra foi aprovada.</p>
+                            <p style="margin-bottom: 30px;">Agora você pode ir para o chat integrado para receber seu produto.</p>
+                            
+                            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: var(--radius); margin-bottom: 30px;">
+                                <p style="font-weight: 600; margin-bottom: 10px;">ID da sua compra:</p>
+                                <p style="font-family: monospace; font-size: 18px; color: var(--success);" id="finalOrderId"></p>
+                                <p style="margin-top: 10px; font-size: 14px;"><small>Informe este ID no chat para receber seu produto</small></p>
+                            </div>
+                            
+                            <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 30px;">
+                                Sua compra foi registrada e será processada em breve. O sistema anti-scam verificou seu comprovante e tudo está correto.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Passo 4: Chat -->
+                    <div class="modal-step" id="stepContent4">
+                        <h3 class="text-center mb-20">Suporte ao Cliente</h3>
+                        <div class="text-center">
+                            <i class="fas fa-comments" style="font-size: 80px; color: var(--primary); margin-bottom: 20px;"></i>
+                            <p style="font-size: 18px; margin-bottom: 20px;">Escolha uma opção abaixo:</p>
+                            
+                            <div class="chat-options">
+                                <button class="chat-option-btn primary" id="startPurchaseChat">
+                                    <i class="fas fa-shopping-cart"></i> Iniciar uma Compra
+                                </button>
+                                <button class="chat-option-btn" id="supportChat">
+                                    <i class="fas fa-headset"></i> Falar com Suporte
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="modal-btn prev" id="prevStep">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button class="modal-btn next" id="nextStep">
+                        Próximo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Integrado -->
+        <div class="chat-overlay" id="chatOverlay">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3>Suporte BrainzBR_STORE</h3>
+                    <button class="chat-close" id="closeChat">&times;</button>
+                </div>
+                
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-message bot">
+                        Olá! Seja bem-vindo ao suporte da BrainzBR_STORE. Como posso ajudá-lo hoje?
+                    </div>
+                    
+                    <div class="chat-options" id="initialOptions">
+                        <button class="chat-option-btn primary" id="chatPurchaseBtn">
+                            <i class="fas fa-shopping-cart"></i> Iniciar uma Compra
+                        </button>
+                        <button class="chat-option-btn" id="chatSupportBtn">
+                            <i class="fas fa-headset"></i> Falar com Suporte
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area" id="chatInputArea">
+                    <div class="chat-input-wrapper">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Digite sua mensagem...">
+                        <button class="chat-send" id="sendMessage">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Painel Admin -->
+        <div class="admin-overlay" id="adminOverlay">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h3>Painel Administrativo</h3>
+                    <button class="admin-close" id="closeAdmin">&times;</button>
+                </div>
+                
+                <div class="admin-body">
+                    <div class="admin-sidebar">
+                        <div class="admin-menu">
+                            <button class="admin-menu-btn active" data-section="products">
+                                <i class="fas fa-box"></i> Produtos
+                            </button>
+                            <button class="admin-menu-btn" data-section="tabs">
+                                <i class="fas fa-folder"></i> Abas/Lojas
+                            </button>
+                            <button class="admin-menu-btn" data-section="orders">
+                                <i class="fas fa-shopping-bag"></i> Pedidos
+                            </button>
+                            <button class="admin-menu-btn" data-section="chats">
+                                <i class="fas fa-comments"></i> Chats
+                            </button>
+                            <button class="admin-menu-btn" data-section="settings">
+                                <i class="fas fa-cog"></i> Configurações
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-content">
+                        <!-- Seção Produtos -->
+                        <div class="admin-section active" id="section-products">
+                            <h4>Gerenciar Produtos</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Tipo de Produto</label>
+                                    <select class="form-control" id="productType">
+                                        <option value="normal">Produto Normal</option>
+                                        <option value="brainrot">Brainrot</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Aba</label>
+                                    <select class="form-control" id="productTab">
+                                        <!-- Opções serão preenchidas dinamicamente -->
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Nome do Produto</label>
+                                    <input type="text" class="form-control" id="productName" placeholder="Nome do produto">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Preço (R$)</label>
+                                    <input type="number" class="form-control" id="productPrice" placeholder="0.00" step="0.01">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" id="normalProductFields">
+                                <label class="form-label">Descrição</label>
+                                <textarea class="form-control" id="productDescription" rows="3" placeholder="Descrição do produto"></textarea>
+                            </div>
+                            
+                            <div class="form-group d-none" id="brainrotProductFields">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Raridade</label>
+                                        <select class="form-control" id="productRarity">
+                                            <option value="common">Comum</option>
+                                            <option value="rare">Raro</option>
+                                            <option value="epic">Épico</option>
+                                            <option value="legendary">Lendário</option>
+                                            <option value="mythic">Mítico</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Geração por Segundo</label>
+                                        <input type="number" class="form-control" id="productGeneration" placeholder="Ex: 10">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Mutação</label>
+                                        <input type="text" class="form-control" id="productMutation" placeholder="Tipo de mutação">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Traits (separados por vírgula)</label>
+                                        <input type="text" class="form-control" id="productTraits" placeholder="Ex: Veloz, Inteligente, Forte">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Quantidade em Estoque</label>
+                                    <input type="number" class="form-control" id="productStock" placeholder="0">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Imagem (URL)</label>
+                                    <input type="text" class="form-control" id="productImage" placeholder="URL da imagem">
+                                </div>
+                            </div>
+                            
+                            <button class="modal-btn success w-100" id="saveProduct">
+                                <i class="fas fa-save"></i> Salvar Produto
+                            </button>
+                            
+                            <div class="mt-20">
+                                <h4>Produtos Cadastrados</h4>
+                                <div class="admin-table-container">
+                                    <table class="admin-table" id="productsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Tipo</th>
+                                                <th>Preço</th>
+                                                <th>Estoque</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productsTableBody">
+                                            <!-- Produtos serão carregados dinamicamente -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Seção Abas/Lojas -->
+                        <div class="admin-section" id="section-tabs">
+                            <h4>Gerenciar Abas/Lojas</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Nome da Aba/Loja</label>
+                                    <input type="text" class="form-control" id="tabName" placeholder="Nome da aba">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Ícone (FontAwesome)</label>
+                                    <input type="text" class="form-control" id="tabIcon" placeholder="Ex: fas fa-gamepad">
+                                </div>
+                            </div>
+                            <button class="modal-btn success w-100" id="saveTab">
+                                <i class="fas fa-plus"></i> Adicionar Aba
+                            </button>
+                            
+                            <div class="mt-20">
+                                <h4>Abas Cadastradas</h4>
+                                <div class="admin-table-container">
+                                    <table class="admin-table" id="tabsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Produtos</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabsTableBody">
+                                            <!-- Abas serão carregadas dinamicamente -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Seção Pedidos -->
+                        <div class="admin-section" id="section-orders">
+                            <h4>Pedidos Realizados</h4>
+                            <div class="admin-table-container">
+                                <table class="admin-table" id="ordersTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Data</th>
+                                            <th>Produtos</th>
+                                            <th>Valor</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ordersTableBody">
+                                        <!-- Pedidos serão carregados dinamicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Seção Chats -->
+                        <div class="admin-section" id="section-chats">
+                            <h4>Chats Ativos</h4>
+                            <div id="adminChats">
+                                <!-- Chats serão carregados dinamicamente -->
+                                <p class="text-center">Nenhum chat ativo no momento.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Seção Configurações -->
+                        <div class="admin-section" id="section-settings">
+                            <h4>Configurações do Sistema</h4>
+                            <div class="form-group">
+                                <label class="form-label">Senha de Administrador</label>
+                                <input type="password" class="form-control" id="adminPassword" value="BRAINZBR_ADMIN_2024">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chave PIX</label>
+                                <input type="text" class="form-control" id="pixKey" value="8a5850c2-3987-4c18-8197-37f93739d9ec" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nome do Beneficiário PIX</label>
+                                <input type="text" class="form-control" id="pixName" value="Bruno Teixeira De Carvalho" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Webhook URL</label>
+                                <input type="text" class="form-control" id="webhookUrl" value="https://discord.com/api/webhooks/1445110961135554610/eigSaNkJseTw_mc-nKYeztlKsymJ1bk-UU84XgZ9Tl8Hj0D65iRx2eVq2F2rm2Kd1gRc">
+                            </div>
+                            <button class="modal-btn success w-100" id="saveSettings">
+                                <i class="fas fa-save"></i> Salvar Configurações
+                            </button>
+                            
+                            <div class="mt-20">
+                                <h4>Limpar Dados</h4>
+                                <p>Esta ação irá remover todos os dados do sistema. Use com cautela!</p>
+                                <button class="action-btn delete w-100" id="clearData">
+                                    <i class="fas fa-trash"></i> Limpar Todos os Dados
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notificações Toast -->
+        <div id="toastContainer"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Configuração das partículas animadas
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#4361ee" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#7209b7",
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+        });
+
+        // Sistema de e-commerce completo
+        class BrainzBRStore {
+            constructor() {
+                // Inicializar dados
+                this.initData();
+                
+                // Elementos DOM
+                this.elements = this.getDOMElements();
+                
+                // Estado do sistema
+                this.state = {
+                    currentStep: 1,
+                    cart: [],
+                    captchaCode: '',
+                    orderId: '',
+                    receiptFile: null,
+                    isAdmin: false,
+                    chatMessages: [],
+                    activeChats: [],
+                    adminClicks: 0
+                };
+                
+                // Inicializar eventos
+                this.initEvents();
+                
+                // Carregar dados do localStorage
+                this.loadFromStorage();
+                
+                // Renderizar produtos
+                this.renderProducts();
+                this.renderTabs();
+                
+                // Gerar captcha inicial
+                this.generateCaptcha();
+            }
+            
+            initData() {
+                // Dados padrão
+                if (!localStorage.getItem('brainzbr_store_tabs')) {
+                    const defaultTabs = [
+                        { id: 'default', name: 'Produtos em Destaque', icon: 'fas fa-star' }
+                    ];
+                    localStorage.setItem('brainzbr_store_tabs', JSON.stringify(defaultTabs));
+                }
+                
+                if (!localStorage.getItem('brainzbr_store_products')) {
+                    const defaultProducts = [
+                        {
+                            id: '1',
+                            name: 'Brainrot Épico',
+                            type: 'brainrot',
+                            description: 'Um brainrot épico com habilidades especiais',
+                            price: 149.99,
+                            stock: 5,
+                            rarity: 'epic',
+                            generation: 25,
+                            mutation: 'Velocidade Aumentada',
+                            traits: 'Rápido, Inteligente, Resistente',
+                            image: '',
+                            tabId: 'default'
+                        },
+                        {
+                            id: '2',
+                            name: 'Brainrot Lendário',
+                            type: 'brainrot',
+                            description: 'Brainrot lendário com poderes incríveis',
+                            price: 299.99,
+                            stock: 2,
+                            rarity: 'legendary',
+                            generation: 50,
+                            mutation: 'Força Sobrenatural',
+                            traits: 'Super Força, Durabilidade, Agilidade',
+                            image: '',
+                            tabId: 'default'
+                        },
+                        {
+                            id: '3',
+                            name: 'Produto Premium',
+                            type: 'normal',
+                            description: 'Produto normal de alta qualidade',
+                            price: 89.99,
+                            stock: 10,
+                            image: '',
+                            tabId: 'default'
+                        }
+                    ];
+                    localStorage.setItem('brainzbr_store_products', JSON.stringify(defaultProducts));
+                }
+                
+                if (!localStorage.getItem('brainzbr_store_orders')) {
+                    localStorage.setItem('brainzbr_store_orders', JSON.stringify([]));
+                }
+                
+                if (!localStorage.getItem('brainzbr_store_chats')) {
+                    localStorage.setItem('brainzbr_store_chats', JSON.stringify([]));
+                }
+                
+                if (!localStorage.getItem('brainzbr_store_settings')) {
+                    const defaultSettings = {
+                        adminPassword: 'BRAINZBR_ADMIN_2024',
+                        pixKey: '8a5850c2-3987-4c18-8197-37f93739d9ec',
+                        pixName: 'Bruno Teixeira De Carvalho',
+                        webhookUrl: 'https://media.guilded.gg/webhooks/b9453e99-729b-4673-9787-e43828658d2c/MpyC72zyucA86weM2SwyIWIekWuM4iyUuAuyscsEwikiAmmmG0U0wcykuEIuWA4WSSUmi6OUyq0WOk2isWcemC'
+                    };
+                    localStorage.setItem('brainzbr_store_settings', JSON.stringify(defaultSettings));
+                }
+            }
+            
+            getDOMElements() {
+                return {
+                    // Cabeçalho
+                    adminTrigger: document.getElementById('adminTrigger'),
+                    openCart: document.getElementById('openCart'),
+                    cartCount: document.getElementById('cartCount'),
+                    
+                    // Abas
+                    tabsHeader: document.getElementById('tabsHeader'),
+                    productsGrid: document.getElementById('productsGrid'),
+                    
+                    // Modal de compra
+                    purchaseModal: document.getElementById('purchaseModal'),
+                    closeModal: document.getElementById('closeModal'),
+                    
+                    // Passos
+                    step1: document.getElementById('step1'),
+                    step2: document.getElementById('step2'),
+                    step3: document.getElementById('step3'),
+                    step4: document.getElementById('step4'),
+                    stepContent1: document.getElementById('stepContent1'),
+                    stepContent2: document.getElementById('stepContent2'),
+                    stepContent3: document.getElementById('stepContent3'),
+                    stepContent4: document.getElementById('stepContent4'),
+                    prevStep: document.getElementById('prevStep'),
+                    nextStep: document.getElementById('nextStep'),
+                    
+                    // CAPTCHA
+                    captchaCode: document.getElementById('captchaCode'),
+                    captchaInput: document.getElementById('captchaInput'),
+                    newCaptcha: document.getElementById('newCaptcha'),
+                    audioCaptcha: document.getElementById('audioCaptcha'),
+                    
+                    // PIX
+                    pixTotal: document.getElementById('pixTotal'),
+                    orderIdText: document.getElementById('orderIdText'),
+                    copyOrderId: document.getElementById('copyOrderId'),
+                    uploadBox: document.getElementById('uploadBox'),
+                    receiptInput: document.getElementById('receiptInput'),
+                    uploadPreview: document.getElementById('uploadPreview'),
+                    receiptPreview: document.getElementById('receiptPreview'),
+                    fileName: document.getElementById('fileName'),
+                    removeReceipt: document.getElementById('removeReceipt'),
+                    finalOrderId: document.getElementById('finalOrderId'),
+                    
+                    // Chat
+                    chatOverlay: document.getElementById('chatOverlay'),
+                    closeChat: document.getElementById('closeChat'),
+                    chatBody: document.getElementById('chatBody'),
+                    initialOptions: document.getElementById('initialOptions'),
+                    chatPurchaseBtn: document.getElementById('chatPurchaseBtn'),
+                    chatSupportBtn: document.getElementById('chatSupportBtn'),
+                    chatInputArea: document.getElementById('chatInputArea'),
+                    chatInput: document.getElementById('chatInput'),
+                    sendMessage: document.getElementById('sendMessage'),
+                    startPurchaseChat: document.getElementById('startPurchaseChat'),
+                    supportChat: document.getElementById('supportChat'),
+                    
+                    // Painel Admin
+                    adminOverlay: document.getElementById('adminOverlay'),
+                    closeAdmin: document.getElementById('closeAdmin'),
+                    adminMenuBtns: document.querySelectorAll('.admin-menu-btn'),
+                    adminSections: document.querySelectorAll('.admin-section'),
+                    
+                    // Seção Produtos
+                    productType: document.getElementById('productType'),
+                    productTab: document.getElementById('productTab'),
+                    productName: document.getElementById('productName'),
+                    productPrice: document.getElementById('productPrice'),
+                    productDescription: document.getElementById('productDescription'),
+                    productRarity: document.getElementById('productRarity'),
+                    productGeneration: document.getElementById('productGeneration'),
+                    productMutation: document.getElementById('productMutation'),
+                    productTraits: document.getElementById('productTraits'),
+                    productStock: document.getElementById('productStock'),
+                    productImage: document.getElementById('productImage'),
+                    normalProductFields: document.getElementById('normalProductFields'),
+                    brainrotProductFields: document.getElementById('brainrotProductFields'),
+                    saveProduct: document.getElementById('saveProduct'),
+                    productsTableBody: document.getElementById('productsTableBody'),
+                    
+                    // Seção Abas
+                    tabName: document.getElementById('tabName'),
+                    tabIcon: document.getElementById('tabIcon'),
+                    saveTab: document.getElementById('saveTab'),
+                    tabsTableBody: document.getElementById('tabsTableBody'),
+                    
+                    // Seção Pedidos
+                    ordersTableBody: document.getElementById('ordersTableBody'),
+                    
+                    // Seção Configurações
+                    adminPassword: document.getElementById('adminPassword'),
+                    pixKey: document.getElementById('pixKey'),
+                    pixName: document.getElementById('pixName'),
+                    webhookUrl: document.getElementById('webhookUrl'),
+                    saveSettings: document.getElementById('saveSettings'),
+                    clearData: document.getElementById('clearData'),
+                    
+                    // Toast
+                    toastContainer: document.getElementById('toastContainer')
+                };
+            }
+            
+            initEvents() {
+                // Admin trigger
+                this.elements.adminTrigger.addEventListener('click', () => {
+                    this.state.adminClicks++;
+                    if (this.state.adminClicks === 3) {
+                        this.showAdminLogin();
+                        this.state.adminClicks = 0;
+                    }
+                });
+                
+                // Carrinho
+                this.elements.openCart.addEventListener('click', () => {
+                    if (this.state.cart.length === 0) {
+                        this.showToast('Seu carrinho está vazio', 'warning');
+                        return;
+                    }
+                    this.startPurchase();
+                });
+                
+                // Modal
+                this.elements.closeModal.addEventListener('click', () => {
+                    this.closePurchaseModal();
+                });
+                
+                // Navegação de passos
+                this.elements.prevStep.addEventListener('click', () => this.prevStep());
+                this.elements.nextStep.addEventListener('click', () => this.nextStep());
+                
+                // CAPTCHA
+                this.elements.newCaptcha.addEventListener('click', () => this.generateCaptcha());
+                this.elements.audioCaptcha.addEventListener('click', () => this.speakCaptcha());
+                this.elements.captchaInput.addEventListener('input', (e) => this.validateCaptcha(e.target.value));
+                
+                // PIX
+                this.elements.copyOrderId.addEventListener('click', () => this.copyOrderId());
+                this.elements.uploadBox.addEventListener('click', () => this.elements.receiptInput.click());
+                this.elements.receiptInput.addEventListener('change', (e) => this.handleReceiptUpload(e));
+                this.elements.removeReceipt.addEventListener('click', () => this.removeReceipt());
+                
+                // Chat
+                this.elements.closeChat.addEventListener('click', () => this.closeChat());
+                this.elements.chatPurchaseBtn.addEventListener('click', () => this.startChatPurchase());
+                this.elements.chatSupportBtn.addEventListener('click', () => this.startChatSupport());
+                this.elements.startPurchaseChat.addEventListener('click', () => this.openChat());
+                this.elements.supportChat.addEventListener('click', () => this.openChat());
+                this.elements.sendMessage.addEventListener('click', () => this.sendChatMessage());
+                this.elements.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendChatMessage();
+                });
+                
+                // Painel Admin
+                this.elements.closeAdmin.addEventListener('click', () => this.closeAdmin());
+                this.elements.adminMenuBtns.forEach(btn => {
+                    btn.addEventListener('click', () => this.switchAdminSection(btn.dataset.section));
+                });
+                
+                // Seção Produtos
+                this.elements.productType.addEventListener('change', (e) => this.toggleProductFields(e.target.value));
+                this.elements.saveProduct.addEventListener('click', () => this.saveProduct());
+                
+                // Seção Abas
+                this.elements.saveTab.addEventListener('click', () => this.saveTab());
+                
+                // Seção Configurações
+                this.elements.saveSettings.addEventListener('click', () => this.saveSettings());
+                this.elements.clearData.addEventListener('click', () => this.clearAllData());
+                
+                // Fechar modais ao clicar fora
+                window.addEventListener('click', (e) => {
+                    if (e.target === this.elements.purchaseModal) this.closePurchaseModal();
+                    if (e.target === this.elements.chatOverlay) this.closeChat();
+                    if (e.target === this.elements.adminOverlay) this.closeAdmin();
+                });
+            }
+            
+            // ========== FUNÇÕES DO CARRINHO ==========
+            addToCart(product) {
+                const existingItem = this.state.cart.find(item => item.id === product.id);
+                
+                if (existingItem) {
+                    // Verifica se ainda há estoque disponível
+                    const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                    const productInStock = products.find(p => p.id === product.id);
+                    
+                    if (!productInStock || existingItem.quantity >= productInStock.stock) {
+                        this.showToast('Estoque insuficiente', 'error');
+                        return;
+                    }
+                    existingItem.quantity++;
+                } else {
+                    // Verifica se o produto tem estoque
+                    if (product.stock <= 0) {
+                        this.showToast('Produto esgotado', 'error');
+                        return;
+                    }
+                    this.state.cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                }
+                
+                this.updateCartCount();
+                this.showToast(`${product.name} adicionado ao carrinho`, 'success');
+                this.saveToStorage();
+            }
+            
+            updateCartCount() {
+                const count = this.state.cart.reduce((total, item) => total + item.quantity, 0);
+                this.elements.cartCount.textContent = count;
+            }
+            
+            getCartTotal() {
+                return this.state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+            
+            // ========== FUNÇÕES DE PRODUTOS ==========
+            renderProducts(tabId = 'default') {
+                const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                const tabProducts = products.filter(p => p.tabId === tabId);
+                
+                this.elements.productsGrid.innerHTML = '';
+                
+                if (tabProducts.length === 0) {
+                    this.elements.productsGrid.innerHTML = `
+                        <div class="text-center" style="grid-column: 1/-1; padding: 40px;">
+                            <i class="fas fa-box-open" style="font-size: 60px; color: var(--gray); margin-bottom: 20px;"></i>
+                            <h3>Nenhum produto nesta categoria</h3>
+                            <p>Volte mais tarde ou selecione outra aba.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                tabProducts.forEach(product => {
+                    const productCard = this.createProductCard(product);
+                    this.elements.productsGrid.appendChild(productCard);
+                });
+            }
+            
+            createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                let badgeHTML = '';
+                let statsHTML = '';
+                
+                if (product.type === 'brainrot') {
+                    const rarityMap = {
+                        common: { class: 'rarity-common', text: 'Comum' },
+                        rare: { class: 'rarity-rare', text: 'Raro' },
+                        epic: { class: 'rarity-epic', text: 'Épico' },
+                        legendary: { class: 'rarity-legendary', text: 'Lendário' },
+                        mythic: { class: 'rarity-mythic', text: 'Mítico' }
+                    };
+                    
+                    badgeHTML = `<div class="product-badge ${rarityMap[product.rarity].class}">${rarityMap[product.rarity].text}</div>`;
+                    
+                    statsHTML = `
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-value">${product.generation}/s</span>
+                                <span class="stat-label">Geração</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">${product.mutation || 'N/A'}</span>
+                                <span class="stat-label">Mutação</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                const icon = product.type === 'brainrot' ? 'fas fa-brain' : 'fas fa-shopping-bag';
+                const stockStatus = product.stock > 0 ? 'Adicionar ao Carrinho' : 'Esgotado';
+                const disabled = product.stock <= 0;
+                
+                card.innerHTML = `
+                    <div class="product-image">
+                        ${badgeHTML}
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">
+                            <span>${product.name}</span>
+                            ${product.type === 'brainrot' ? `<span class="product-rarity ${rarityMap[product.rarity].class}">${rarityMap[product.rarity].text}</span>` : ''}
+                        </div>
+                        <p class="product-description">${product.description}</p>
+                        ${statsHTML}
+                        <div class="product-footer">
+                            <div class="product-price">R$ ${product.price.toFixed(2)}</div>
+                            <button class="add-to-cart" ${disabled ? 'disabled' : ''} data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> ${stockStatus}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                const addButton = card.querySelector('.add-to-cart');
+                if (!disabled) {
+                    addButton.addEventListener('click', () => this.addToCart(product));
+                }
+                
+                return card;
+            }
+            
+            // ========== FUNÇÕES DE ABAS ==========
+            renderTabs() {
+                const tabs = JSON.parse(localStorage.getItem('brainzbr_store_tabs') || '[]');
+                this.elements.tabsHeader.innerHTML = '';
+                
+                tabs.forEach(tab => {
+                    const tabBtn = document.createElement('button');
+                    tabBtn.className = 'tab-btn';
+                    if (tab.id === 'default') tabBtn.classList.add('active');
+                    tabBtn.dataset.tab = tab.id;
+                    tabBtn.innerHTML = `<i class="${tab.icon}"></i> ${tab.name}`;
+                    
+                    tabBtn.addEventListener('click', () => {
+                        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                        tabBtn.classList.add('active');
+                        this.renderProducts(tab.id);
+                    });
+                    
+                    this.elements.tabsHeader.appendChild(tabBtn);
+                });
+                
+                // Botão para adicionar nova aba (apenas visual, funcionalidade no admin)
+                const addBtn = document.createElement('button');
+                addBtn.className = 'tab-btn add-tab-btn';
+                addBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                addBtn.addEventListener('click', () => {
+                    this.showToast('Use o painel admin para adicionar abas', 'info');
+                });
+                this.elements.tabsHeader.appendChild(addBtn);
+                
+                // Atualizar select de abas no admin
+                this.updateTabSelect();
+            }
+            
+            updateTabSelect() {
+                const tabs = JSON.parse(localStorage.getItem('brainzbr_store_tabs') || '[]');
+                this.elements.productTab.innerHTML = '';
+                
+                tabs.forEach(tab => {
+                    const option = document.createElement('option');
+                    option.value = tab.id;
+                    option.textContent = tab.name;
+                    this.elements.productTab.appendChild(option);
+                });
+            }
+            
+            // ========== FUNÇÕES DE COMPRA ==========
+            startPurchase() {
+                if (this.state.cart.length === 0) {
+                    this.showToast('Adicione produtos ao carrinho primeiro', 'warning');
+                    return;
+                }
+                
+                // Gerar ID da compra
+                this.generateOrderId();
+                
+                // Atualizar total do PIX
+                this.elements.pixTotal.textContent = `R$ ${this.getCartTotal().toFixed(2)}`;
+                
+                // Resetar passo atual
+                this.state.currentStep = 1;
+                this.updateStepIndicator();
+                
+                // Mostrar modal
+                this.elements.purchaseModal.classList.add('active');
+            }
+            
+            closePurchaseModal() {
+                this.elements.purchaseModal.classList.remove('active');
+                // Resetar formulários
+                this.elements.captchaInput.value = '';
+                this.elements.captchaInput.classList.remove('correct', 'incorrect');
+                this.removeReceipt();
+                this.state.receiptFile = null;
+                this.updateNextButton();
+            }
+            
+            // ========== FUNÇÕES DE PASSO A PASSO ==========
+            prevStep() {
+                if (this.state.currentStep > 1) {
+                    this.state.currentStep--;
+                    this.updateStepIndicator();
+                }
+            }
+            
+            nextStep() {
+                if (this.state.currentStep < 4) {
+                    // Validar passo atual antes de avançar
+                    if (this.state.currentStep === 1 && !this.validateCaptcha(this.elements.captchaInput.value, true)) {
+                        return;
+                    }
+                    if (this.state.currentStep === 2 && !this.state.receiptFile) {
+                        this.showToast('Envie o comprovante do PIX primeiro', 'warning');
+                        return;
+                    }
+                    
+                    this.state.currentStep++;
+                    this.updateStepIndicator();
+                    
+                    // Se chegou ao passo 3, mostrar ID final
+                    if (this.state.currentStep === 3) {
+                        this.elements.finalOrderId.textContent = this.state.orderId;
+                        // Simular verificação anti-scam
+                        setTimeout(() => {
+                            this.sendWebhook();
+                            this.completePurchase();
+                        }, 1000);
+                    }
+                }
+            }
+            
+            updateStepIndicator() {
+                // Atualizar indicadores visuais
+                const steps = [this.elements.step1, this.elements.step2, this.elements.step3, this.elements.step4];
+                const stepContents = [this.elements.stepContent1, this.elements.stepContent2, this.elements.stepContent3, this.elements.stepContent4];
+                
+                steps.forEach((step, index) => {
+                    const stepNum = index + 1;
+                    step.classList.remove('active', 'completed');
+                    
+                    if (stepNum < this.state.currentStep) {
+                        step.classList.add('completed');
+                    } else if (stepNum === this.state.currentStep) {
+                        step.classList.add('active');
+                    }
+                });
+                
+                stepContents.forEach((content, index) => {
+                    const stepNum = index + 1;
+                    content.classList.remove('active');
+                    if (stepNum === this.state.currentStep) {
+                        content.classList.add('active');
+                    }
+                });
+                
+                // Atualizar botões
+                this.elements.prevStep.style.display = this.state.currentStep === 1 ? 'none' : 'flex';
+                
+                if (this.state.currentStep === 4) {
+                    this.elements.nextStep.innerHTML = 'Abrir Chat <i class="fas fa-comments"></i>';
+                    this.elements.nextStep.onclick = () => this.openChat();
+                } else {
+                    this.elements.nextStep.innerHTML = 'Próximo <i class="fas fa-arrow-right"></i>';
+                    this.elements.nextStep.onclick = () => this.nextStep();
+                }
+                
+                this.updateNextButton();
+            }
+            
+            updateNextButton() {
+                // Habilitar/desabilitar botão próximo com base no passo atual
+                let enabled = true;
+                
+                if (this.state.currentStep === 1) {
+                    const isCaptchaValid = this.elements.captchaInput.classList.contains('correct');
+                    enabled = isCaptchaValid;
+                } else if (this.state.currentStep === 2) {
+                    enabled = this.state.receiptFile !== null;
+                }
+                
+                this.elements.nextStep.disabled = !enabled;
+            }
+            
+            // ========== FUNÇÕES CAPTCHA ==========
+            generateCaptcha() {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+                let code = '';
+                for (let i = 0; i < 6; i++) {
+                    code += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                this.state.captchaCode = code;
+                this.elements.captchaCode.textContent = code;
+                this.elements.captchaInput.value = '';
+                this.elements.captchaInput.classList.remove('correct', 'incorrect');
+                this.updateNextButton();
+            }
+            
+            validateCaptcha(input, showError = false) {
+                const isValid = input.toUpperCase() === this.state.captchaCode.toUpperCase();
+                
+                this.elements.captchaInput.classList.remove('correct', 'incorrect');
+                if (input) {
+                    this.elements.captchaInput.classList.add(isValid ? 'correct' : 'incorrect');
+                }
+                
+                if (!isValid && showError) {
+                    this.showToast('Código CAPTCHA incorreto', 'error');
+                }
+                
+                this.updateNextButton();
+                return isValid;
+            }
+            
+            speakCaptcha() {
+                const utterance = new SpeechSynthesisUtterance(this.state.captchaCode.split('').join(' '));
+                utterance.lang = 'pt-BR';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            }
+            
+            // ========== FUNÇÕES PIX ==========
+            generateOrderId() {
+                const randomNum = Math.floor(100000 + Math.random() * 900000);
+                this.state.orderId = `BRANZZ_BR-CODE=${randomNum}`;
+                this.elements.orderIdText.textContent = this.state.orderId;
+            }
+            
+            copyOrderId() {
+                navigator.clipboard.writeText(this.state.orderId)
+                    .then(() => this.showToast('ID copiado para a área de transferência', 'success'))
+                    .catch(() => this.showToast('Erro ao copiar ID', 'error'));
+            }
+            
+            handleReceiptUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                
+                // Validar tipo e tamanho
+                const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+                if (!validTypes.includes(file.type)) {
+                    this.showToast('Formato de arquivo inválido. Use JPG, PNG ou PDF', 'error');
+                    return;
+                }
+                
+                if (file.size > 5 * 1024 * 1024) {
+                    this.showToast('Arquivo muito grande. Máximo: 5MB', 'error');
+                    return;
+                }
+                
+                this.state.receiptFile = file;
+                
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.elements.receiptPreview.src = e.target.result;
+                        this.elements.uploadPreview.classList.add('active');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    this.elements.receiptPreview.src = '';
+                    this.elements.uploadPreview.classList.add('active');
+                }
+                
+                this.elements.fileName.textContent = file.name;
+                this.showToast('Comprovante enviado com sucesso', 'success');
+                this.updateNextButton();
+                
+                // Simular verificação anti-scam
+                setTimeout(() => {
+                    this.showToast('✅ Comprovante verificado com sucesso pelo sistema anti-scam', 'success');
+                }, 1500);
+            }
+            
+            removeReceipt() {
+                this.state.receiptFile = null;
+                this.elements.receiptInput.value = '';
+                this.elements.uploadPreview.classList.remove('active');
+                this.elements.receiptPreview.src = '';
+                this.updateNextButton();
+            }
+            
+            // ========== FUNÇÕES DE CHAT ==========
+            openChat() {
+                this.closePurchaseModal();
+                this.elements.chatOverlay.classList.add('active');
+                this.resetChat();
+            }
+            
+            closeChat() {
+                this.elements.chatOverlay.classList.remove('active');
+            }
+            
+            resetChat() {
+                this.elements.chatBody.innerHTML = `
+                    <div class="chat-message bot">
+                        Olá! Seja bem-vindo ao suporte da BrainzBR_STORE. Como posso ajudá-lo hoje?
+                    </div>
+                    <div class="chat-options" id="initialOptions">
+                        <button class="chat-option-btn primary" id="chatPurchaseBtn">
+                            <i class="fas fa-shopping-cart"></i> Iniciar uma Compra
+                        </button>
+                        <button class="chat-option-btn" id="chatSupportBtn">
+                            <i class="fas fa-headset"></i> Falar com Suporte
+                        </button>
+                    </div>
+                `;
+                
+                this.elements.chatInputArea.classList.remove('active');
+                
+                // Reatachar eventos
+                setTimeout(() => {
+                    document.getElementById('chatPurchaseBtn').addEventListener('click', () => this.startChatPurchase());
+                    document.getElementById('chatSupportBtn').addEventListener('click', () => this.startChatSupport());
+                }, 100);
+            }
+            
+            startChatPurchase() {
+                this.elements.initialOptions.remove();
+                this.addChatMessage('bot', 'Para iniciar uma compra, por favor, volte à loja principal e adicione os produtos desejados ao carrinho. Depois, clique no botão "Carrinho" para finalizar a compra.');
+                this.addChatMessage('bot', 'Precisa de ajuda com algum produto específico?');
+            }
+            
+            startChatSupport() {
+                this.elements.initialOptions.remove();
+                this.addChatMessage('bot', 'Você escolheu "Falar com Suporte". Por favor, aguarde enquanto um de nossos administradores atende você.');
+                this.addChatMessage('bot', 'Enquanto isso, você pode digitar sua dúvida ou problema abaixo.');
+                
+                // Notificar admin (simulado)
+                this.notifyAdminChat();
+                
+                setTimeout(() => {
+                    this.elements.chatInputArea.classList.add('active');
+                    this.elements.chatInput.focus();
+                }, 500);
+            }
+            
+            addChatMessage(sender, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender}`;
+                messageDiv.textContent = text;
+                this.elements.chatBody.appendChild(messageDiv);
+                this.elements.chatBody.scrollTop = this.elements.chatBody.scrollHeight;
+                
+                // Salvar no histórico
+                this.state.chatMessages.push({ sender, text, timestamp: new Date().toISOString() });
+                
+                // Se for mensagem de usuário, notificar admin
+                if (sender === 'user') {
+                    this.notifyAdminMessage(text);
+                }
+            }
+            
+            sendChatMessage() {
+                const message = this.elements.chatInput.value.trim();
+                if (!message) return;
+                
+                this.addChatMessage('user', message);
+                this.elements.chatInput.value = '';
+                
+                // Resposta automática do bot
+                setTimeout(() => {
+                    if (message.toLowerCase().includes('+unlock')) {
+                        this.addChatMessage('admin', '✅ Cargo de comprador concedido! Agora você pode receber seus produtos.');
+                        this.addChatMessage('admin', 'Por favor, informe o ID da sua compra para que possamos liberar seu produto.');
+                    } else if (message.toLowerCase().includes('obrigado') || message.toLowerCase().includes('thanks')) {
+                        this.addChatMessage('bot', 'De nada! Estamos aqui para ajudar. 😊');
+                    } else {
+                        this.addChatMessage('bot', 'Entendido. Um administrador será notificado e responderá em breve.');
+                    }
+                }, 1000);
+            }
+            
+            notifyAdminChat() {
+                // Em um sistema real, aqui iria uma notificação push ou atualização em tempo real
+                this.showToast('Solicitação de suporte enviada aos administradores', 'info');
+            }
+            
+            notifyAdminMessage(message) {
+                // Em um sistema real, aqui iria uma notificação para o painel admin
+                console.log('Nova mensagem do usuário para admin:', message);
+            }
+            
+            // ========== FUNÇÕES DO PAINEL ADMIN ==========
+            showAdminLogin() {
+                const password = prompt('Digite a senha de administrador:');
+                const settings = JSON.parse(localStorage.getItem('brainzbr_store_settings') || '{}');
+                
+                if (password === settings.adminPassword) {
+                    this.state.isAdmin = true;
+                    this.openAdminPanel();
+                } else {
+                    this.showToast('Senha incorreta', 'error');
+                }
+            }
+            
+            openAdminPanel() {
+                this.elements.adminOverlay.classList.add('active');
+                this.loadAdminData();
+            }
+            
+            closeAdmin() {
+                this.elements.adminOverlay.classList.remove('active');
+                this.state.isAdmin = false;
+            }
+            
+            switchAdminSection(sectionId) {
+                // Atualizar botões do menu
+                this.elements.adminMenuBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.section === sectionId) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Mostrar seção correspondente
+                this.elements.adminSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === `section-${sectionId}`) {
+                        section.classList.add('active');
+                    }
+                });
+                
+                // Carregar dados específicos da seção
+                if (sectionId === 'products') this.loadProductsTable();
+                if (sectionId === 'tabs') this.loadTabsTable();
+                if (sectionId === 'orders') this.loadOrdersTable();
+                if (sectionId === 'chats') this.loadChats();
+            }
+            
+            loadAdminData() {
+                this.updateTabSelect();
+                this.loadProductsTable();
+                this.loadTabsTable();
+                this.loadOrdersTable();
+                this.loadSettings();
+            }
+            
+            toggleProductFields(type) {
+                if (type === 'brainrot') {
+                    this.elements.normalProductFields.classList.add('d-none');
+                    this.elements.brainrotProductFields.classList.remove('d-none');
+                } else {
+                    this.elements.normalProductFields.classList.remove('d-none');
+                    this.elements.brainrotProductFields.classList.add('d-none');
+                }
+            }
+            
+            saveProduct() {
+                // Garantir que o estoque seja um número válido
+                const stockValue = this.elements.productStock.value;
+                const stock = stockValue === '' ? 0 : parseInt(stockValue);
+                
+                const product = {
+                    id: Date.now().toString(),
+                    name: this.elements.productName.value,
+                    type: this.elements.productType.value,
+                    price: parseFloat(this.elements.productPrice.value) || 0,
+                    stock: isNaN(stock) ? 0 : stock,
+                    image: this.elements.productImage.value,
+                    tabId: this.elements.productTab.value
+                };
+                
+                if (!product.name || product.price <= 0) {
+                    this.showToast('Preencha todos os campos obrigatórios corretamente', 'error');
+                    return;
+                }
+                
+                if (product.type === 'normal') {
+                    product.description = this.elements.productDescription.value || 'Produto de alta qualidade';
+                } else {
+                    product.rarity = this.elements.productRarity.value;
+                    product.generation = parseInt(this.elements.productGeneration.value) || 10;
+                    product.mutation = this.elements.productMutation.value || 'Sem mutação';
+                    product.traits = this.elements.productTraits.value || 'Padrão';
+                    product.description = `Brainrot ${product.rarity} com geração de ${product.generation}/s`;
+                }
+                
+                // Salvar no localStorage
+                const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                products.push(product);
+                localStorage.setItem('brainzbr_store_products', JSON.stringify(products));
+                
+                // Atualizar tabela
+                this.loadProductsTable();
+                
+                // Limpar formulário
+                this.elements.productName.value = '';
+                this.elements.productPrice.value = '';
+                this.elements.productDescription.value = '';
+                this.elements.productStock.value = '';
+                this.elements.productImage.value = '';
+                this.elements.productGeneration.value = '';
+                this.elements.productMutation.value = '';
+                this.elements.productTraits.value = '';
+                
+                this.showToast('Produto salvo com sucesso', 'success');
+                this.renderProducts(); // Atualizar vitrine
+                this.renderTabs(); // Atualizar abas
+            }
+            
+            loadProductsTable() {
+                const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                this.elements.productsTableBody.innerHTML = '';
+                
+                if (products.length === 0) {
+                    this.elements.productsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center">Nenhum produto cadastrado</td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                products.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${product.name}</td>
+                        <td>${product.type === 'brainrot' ? 'Brainrot' : 'Normal'}</td>
+                        <td>R$ ${product.price.toFixed(2)}</td>
+                        <td>${product.stock}</td>
+                        <td>
+                            <button class="action-btn edit" data-id="${product.id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete" data-id="${product.id}">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </td>
+                    `;
+                    
+                    this.elements.productsTableBody.appendChild(row);
+                });
+            }
+            
+            saveTab() {
+                const tabName = this.elements.tabName.value;
+                const tabIcon = this.elements.tabIcon.value;
+                
+                if (!tabName) {
+                    this.showToast('Digite o nome da aba', 'error');
+                    return;
+                }
+                
+                const tab = {
+                    id: `tab_${Date.now()}`,
+                    name: tabName,
+                    icon: tabIcon || 'fas fa-folder'
+                };
+                
+                const tabs = JSON.parse(localStorage.getItem('brainzbr_store_tabs') || '[]');
+                tabs.push(tab);
+                localStorage.setItem('brainzbr_store_tabs', JSON.stringify(tabs));
+                
+                // Atualizar tabela
+                this.loadTabsTable();
+                
+                // Limpar formulário
+                this.elements.tabName.value = '';
+                this.elements.tabIcon.value = '';
+                
+                this.showToast('Aba adicionada com sucesso', 'success');
+                this.renderTabs(); // Atualizar navegação
+            }
+            
+            loadTabsTable() {
+                const tabs = JSON.parse(localStorage.getItem('brainzbr_store_tabs') || '[]');
+                this.elements.tabsTableBody.innerHTML = '';
+                
+                if (tabs.length === 0) {
+                    this.elements.tabsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="3" class="text-center">Nenhuma aba cadastrada</td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                tabs.forEach(tab => {
+                    const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                    const tabProducts = products.filter(p => p.tabId === tab.id);
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><i class="${tab.icon}"></i> ${tab.name}</td>
+                        <td>${tabProducts.length} produtos</td>
+                        <td>
+                            <button class="action-btn delete" data-tab-id="${tab.id}">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </td>
+                    `;
+                    
+                    this.elements.tabsTableBody.appendChild(row);
+                });
+            }
+            
+            loadOrdersTable() {
+                const orders = JSON.parse(localStorage.getItem('brainzbr_store_orders') || '[]');
+                this.elements.ordersTableBody.innerHTML = '';
+                
+                if (orders.length === 0) {
+                    this.elements.ordersTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center">Nenhum pedido registrado</td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${new Date(order.date).toLocaleDateString()}</td>
+                        <td>${order.items.length} itens</td>
+                        <td>R$ ${order.total.toFixed(2)}</td>
+                        <td><span style="color: var(--success)">✅ Concluído</span></td>
+                    `;
+                    
+                    this.elements.ordersTableBody.appendChild(row);
+                });
+            }
+            
+            loadChats() {
+                // Em um sistema real, carregaria chats ativos do localStorage
+                this.elements.adminChats.innerHTML = `
+                    <div class="text-center" style="padding: 40px;">
+                        <i class="fas fa-comments" style="font-size: 60px; color: var(--gray); margin-bottom: 20px;"></i>
+                        <h3>Chat em Tempo Real</h3>
+                        <p>Os chats dos clientes aparecerão aqui automaticamente.</p>
+                        <p><small>Quando um usuário solicitar suporte, você verá a conversa aqui.</small></p>
+                    </div>
+                `;
+            }
+            
+            loadSettings() {
+                const settings = JSON.parse(localStorage.getItem('brainzbr_store_settings') || '{}');
+                this.elements.adminPassword.value = settings.adminPassword || 'BRAINZBR_ADMIN_2024';
+                this.elements.pixKey.value = settings.pixKey || '8a5850c2-3987-4c18-8197-37f93739d9ec';
+                this.elements.pixName.value = settings.pixName || 'Bruno Teixeira De Carvalho';
+                this.elements.webhookUrl.value = settings.webhookUrl || 'https://discord.com/api/webhooks/1445110961135554610/eigSaNkJseTw_mc-nKYeztlKsymJ1bk-UU84XgZ9Tl8Hj0D65iRx2eVq2F2rm2Kd1gRc';
+            }
+            
+            saveSettings() {
+                const settings = {
+                    adminPassword: this.elements.adminPassword.value,
+                    pixKey: this.elements.pixKey.value,
+                    pixName: this.elements.pixName.value,
+                    webhookUrl: this.elements.webhookUrl.value
+                };
+                
+                localStorage.setItem('brainzbr_store_settings', JSON.stringify(settings));
+                this.showToast('Configurações salvas com sucesso', 'success');
+            }
+            
+            // ========== FUNÇÕES DE WEBHOOK ==========
+            sendWebhook() {
+                // Simulação de envio de webhook
+                console.log('=== DADOS DA COMPRA PARA WEBHOOK ===');
+                console.log('ID da Compra:', this.state.orderId);
+                console.log('Total: R$', this.getCartTotal().toFixed(2));
+                console.log('Produtos:', this.state.cart);
+                console.log('Comprovante:', this.state.receiptFile ? this.state.receiptFile.name : 'N/A');
+                console.log('=== FIM DOS DADOS ===');
+                
+                // Em um sistema real, aqui faria uma requisição fetch para o webhook do Discord
+                this.showToast('✅ Compra registrada e notificação enviada', 'success');
+            }
+            
+            // ========== FUNÇÕES DE FINALIZAÇÃO ==========
+            completePurchase() {
+                // Salvar pedido
+                const order = {
+                    id: this.state.orderId,
+                    date: new Date().toISOString(),
+                    items: this.state.cart,
+                    total: this.getCartTotal()
+                };
+                
+                const orders = JSON.parse(localStorage.getItem('brainzbr_store_orders') || '[]');
+                orders.push(order);
+                localStorage.setItem('brainzbr_store_orders', JSON.stringify(orders));
+                
+                // Atualizar estoque
+                this.updateStock();
+                
+                // Limpar carrinho
+                this.state.cart = [];
+                this.updateCartCount();
+                
+                this.showToast('Compra finalizada com sucesso!', 'success');
+            }
+            
+            updateStock() {
+                const products = JSON.parse(localStorage.getItem('brainzbr_store_products') || '[]');
+                
+                this.state.cart.forEach(cartItem => {
+                    const product = products.find(p => p.id === cartItem.id);
+                    if (product) {
+                        product.stock = Math.max(0, product.stock - cartItem.quantity);
+                    }
+                });
+                
+                localStorage.setItem('brainzbr_store_products', JSON.stringify(products));
+                
+                // Atualizar exibição dos produtos
+                this.renderProducts();
+            }
+            
+            // ========== FUNÇÕES DE ARMAZENAMENTO ==========
+            saveToStorage() {
+                localStorage.setItem('brainzbr_store_cart', JSON.stringify(this.state.cart));
+            }
+            
+            loadFromStorage() {
+                const savedCart = localStorage.getItem('brainzbr_store_cart');
+                if (savedCart) {
+                    this.state.cart = JSON.parse(savedCart);
+                    this.updateCartCount();
+                }
+            }
+            
+            clearAllData() {
+                if (confirm('Tem certeza que deseja limpar TODOS os dados do sistema? Esta ação não pode ser desfeita.')) {
+                    localStorage.clear();
+                    this.initData();
+                    this.state.cart = [];
+                    this.updateCartCount();
+                    this.renderProducts();
+                    this.renderTabs();
+                    this.loadAdminData();
+                    this.showToast('Todos os dados foram limpos', 'success');
+                }
+            }
+            
+            // ========== FUNÇÕES UTILITÁRIAS ==========
+            showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                this.elements.toastContainer.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'toastSlideIn 0.3s ease reverse';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Inicializar o sistema quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            window.store = new BrainzBRStore();
+        });
+    </script>
+</body>
+</html>
